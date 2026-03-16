@@ -38,6 +38,11 @@ The frontend will be available at `http://localhost:3000` (or the port printed i
 
 > The frontend expects the backend API to be running on port `8080`.
 
+## Test Configuration
+
+The backend uses Vitest for testing, and the frontend uses Playwright for end-to-end testing. The test configurations are defined in `backend/vitest.config.ts` and `backend/playwright.config.ts`, respectively.
+
+
 ## Running Tests
 
 The backend tests are written using Vitest. To run the tests:
