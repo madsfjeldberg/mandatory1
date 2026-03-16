@@ -10,7 +10,7 @@ From the `backend/` directory, build and start the containers:
 
 ```bash
 cd backend
-docker compose up --build
+docker compose up --build -d
 ```
 
 This starts:
@@ -40,13 +40,31 @@ The frontend will be available at `http://localhost:3000` (or the port printed i
 
 ## Test Configuration
 
-The backend uses Vitest for testing, and the frontend uses Playwright for end-to-end testing. The test configurations are defined in `backend/vitest.config.ts` and `backend/playwright.config.ts`, respectively.
+The backend uses Vitest for unit and integration testing, and the frontend uses Playwright for end-to-end testing. The test configurations are defined in `backend/vitest.config.ts` and `backend/playwright.config.ts`, respectively.
 
 ## Running Tests
 
+First install the dependencies for the backend:
+
+```bash
+npm install
+```
+
 The backend tests are written using Vitest. To run the tests:
 ```bash
-cd backend
-npm install
-npm test
+npm run test
+```
+This will run the tests continually in watch mode. To run the tests once and exit:
+```bash
+npm run test:once
+```
+
+Or run the tests in ui mode:
+```bash
+npm run test:ui
+```
+
+The frontend tests are written using Playwright. To run the tests:
+```bash
+npm run test:e2e
 ```
