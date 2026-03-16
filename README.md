@@ -37,3 +37,12 @@ npx serve .
 The frontend will be available at `http://localhost:3000` (or the port printed in the terminal).
 
 > The frontend expects the backend API to be running on port `8080`.
+
+## Running Tests
+
+The backend tests are written using Vitest. To run the tests:
+```bash
+cd backend
+npm install
+npm test
+```
