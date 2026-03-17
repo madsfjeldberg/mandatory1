@@ -4,10 +4,10 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-COPY package*.json ./
+COPY ../package*.json ./
 RUN npm ci
 
-COPY tsconfig.json ./
+COPY ../tsconfig.json ./
 COPY index.ts ./
 COPY src ./src
 RUN npm run build
@@ -17,7 +17,7 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Install only production dependencies
-COPY package*.json ./
+COPY ../package*.json ./
 RUN npm ci --omit=dev
 
 # Compiled output
