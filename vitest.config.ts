@@ -2,6 +2,9 @@ import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   test: {
+    testTimeout: 60_000,    // container spin-up time
+    hookTimeout: 60_000,    // beforeAll/afterAll also need time
+    
     projects: [
       {
         test: {
