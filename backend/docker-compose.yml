@@ -1,8 +1,8 @@
 services:
   api:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ../
+      dockerfile: backend/Dockerfile
     ports:
       # Frontend (js_fake_info_frontend) expects the backend on :8080
       - "8080:3000"
