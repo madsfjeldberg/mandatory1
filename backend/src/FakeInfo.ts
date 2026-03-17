@@ -17,7 +17,7 @@ const FILE_PERSON_NAMES = path.join(
   "../../data/person-names.json",
 );
 
-const PHONE_PREFIXES = [
+export const PHONE_PREFIXES = [
   "2",
   "30",
   "31",
