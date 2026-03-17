@@ -82,11 +82,26 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  webServer: {
-    command: 'npx serve .',
-    cwd: './frontend',              // tells Playwright which directory to run the command in
-    url: 'http://localhost:3000',
-    reuseExistingServer: false,     // always start a new server instance, to ensure a clean state for each test run
-                         // true would reuse an existing server if found, which can be convenient during development to avoid waiting for the server to start
-  },
+  webServer: [
+    {
+      command: 'npx serve .',
+      cwd: './frontend',              // tells Playwright which directory to run the command in
+      url: 'http://localhost:3000',
+      reuseExistingServer: false,     // always start a new server instance, to ensure a clean state for each test run
+                          // true would reuse an existing server if found, which can be convenient during development to avoid waiting for the server to start
+    },
+    {
+      command: 'docker compose up',
+      cwd: './backend',
+      wait: {
+        stdout: /api-1  \| fake_info server running on port 3000/i  // wait for this log message to appear in the Docker container's output, indicating that the server is ready to accept requests
+      },
+      url: 'http://localhost:8080/cpr', // health check endpoint to verify the server is up and running.
+                                        // since there are no dedicated health check endpoints in the provided backend, we can use the existing /cpr endpoint as a health check.
+      reuseExistingServer: true,        // by setting this to true playwright will check if the server is already running before starting a new one, which can save time during development. In CI, it will always start a new instance to ensure a clean state.
+      timeout: 120 * 1000, // wait up to 2 minutes for Docker to be ready
+      stdout: 'pipe',
+      stderr: 'pipe',
+    },
+  ]
 });
