@@ -1,7 +1,7 @@
 import { beforeAll, afterAll, beforeEach, describe, it, expect, vi } from "vitest";
 import { MySqlContainer, StartedMySqlContainer } from "@testcontainers/mysql";
 import mysql, { Connection, Pool } from "mysql2/promise";
-import * as path from "path";
+import * as path from "node:path";
 
 import { FakeInfo, Person } from "../../backend/src/FakeInfo";
 import { Town } from "../../backend/src/Town";
@@ -11,7 +11,7 @@ let poolQueryFn: Pool["query"];
 
 vi.mock("../../backend/src/DB", () => ({
   pool: {
-    query: (...args: unknown[]) => poolQueryFn(...(args as Parameters<Pool["query"]>)),
+    query: (sql: string, values?: unknown[]) => poolQueryFn(sql, values),
   },
 }));
 
@@ -69,45 +69,33 @@ describe("Testing creation of fake people and validation of connection for perso
     const info = await FakeInfo.create();
     const person: Person = info.getFakePerson();
 
-    expect(person).toMatchObject({
-      CPR: expect.any(String),
-      firstName: expect.any(String),
-      lastName: expect.any(String),
-      gender: expect.any(String),
-      birthDate: expect.any(String),
-      address: expect.objectContaining({
-        street: expect.any(String),
-        number: expect.any(String),
-        floor: expect.anything(),
-        door: expect.anything(),
-        postal_code: expect.any(String),
-        town_name: expect.any(String),
-      }),
-      phoneNumber: expect.any(String),
-    });
+    expectValidPerson(person);
   });
 
   it("creates 100 fake person objects with all required fields", async () => {
     const people: Person[] = await FakeInfo.getFakePersons(100);
-    const person = people[0];
 
     expect(people).toHaveLength(100);
-    
-    expect(person).toMatchObject({
-      CPR: expect.any(String),
-      firstName: expect.any(String),
-      lastName: expect.any(String),
-      gender: expect.any(String),
-      birthDate: expect.any(String),
-      address: expect.objectContaining({
-        street: expect.any(String),
-        number: expect.any(String),
-        floor: expect.anything(),
-        door: expect.anything(),
-        postal_code: expect.any(String),
-        town_name: expect.any(String),
-      }),
-      phoneNumber: expect.any(String),
-    });
+    expectValidPerson(people[0]);
   });
 });
+
+//--------------------------------- helper function ---------------------------------
+function expectValidPerson(person: Person): void {
+  expect(person).toMatchObject({
+    CPR: expect.any(String),
+    firstName: expect.any(String),
+    lastName: expect.any(String),
+    gender: expect.any(String),
+    birthDate: expect.any(String),
+    address: expect.objectContaining({
+      street: expect.any(String),
+      number: expect.any(String),
+      floor: expect.anything(),
+      door: expect.anything(),
+      postal_code: expect.any(String),
+      town_name: expect.any(String),
+    }),
+    phoneNumber: expect.any(String),
+  });
+}
