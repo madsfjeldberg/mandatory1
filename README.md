@@ -38,12 +38,17 @@ The frontend will be available at `http://localhost:3000` (or the port printed i
 
 > The frontend expects the backend API to be running on port `8080`.
 
-## Test Configuration
+## Test
 
+## Prerequisite
+This project uses Testcontainers for integration tests.
+Therefor you need to have docker running on your local pc, to ensure the integration tests can run.
+Otherwise it will fail.
+
+## Test Configuration
 The backend uses Vitest for unit and integration testing, and the frontend uses Playwright for end-to-end testing. The test configurations are defined in `backend/vitest.config.ts` and `backend/playwright.config.ts`, respectively.
 
 ## Running Tests
-
 First install the dependencies for the backend:
 
 ```bash

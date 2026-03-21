@@ -14,7 +14,7 @@ const GENDER_FEMININE = "female";
 
 const FILE_PERSON_NAMES = path.join(
   __dirname,
-  "../../data/person-names.json",
+  "../data/person-names.json",
 );
 
 export const PHONE_PREFIXES = [
