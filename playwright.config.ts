@@ -94,7 +94,7 @@ export default defineConfig({
       command: 'docker compose up',
       cwd: './backend',
       wait: {
-        stdout: /api-1  \| fake_info server running on port 3000/i  // wait for this log message to appear in the Docker container's output, indicating that the server is ready to accept requests
+        stdout: /api-1\s{2}\|\sfake_info server running on port 3000/i  // wait for this log message to appear in the Docker container's output, indicating that the server is ready to accept requests
       },
       url: 'http://localhost:8080/cpr', // health check endpoint to verify the server is up and running.
                                         // since there are no dedicated health check endpoints in the provided backend, we can use the existing /cpr endpoint as a health check.
