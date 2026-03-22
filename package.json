@@ -10,7 +10,8 @@
     "test": "vitest",
     "test:once": "vitest run",
     "test:ui": "vitest --ui",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:api": "newman run tests/api/postman/collection.json"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +30,7 @@
     "@types/node": "^20.19.37",
     "@vitest/ui": "^4.0.18",
     "eslint": "^10.0.3",
+    "newman": "^6.2.1",
     "playwright": "^1.58.2",
     "testcontainers": "^11.12.0",
     "ts-node": "^10.9.2",

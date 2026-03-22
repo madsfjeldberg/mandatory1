@@ -32,6 +32,46 @@ jobs:
       - name: Run unit tests
         run: npm run test:once
 
+  newman-api-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm ci
+      - name: Start backend services
+        run: docker compose -f backend/docker-compose.yml up -d
+      - name: Wait for backend API
+        run: |
+          for i in {1..30}; do
+            if curl -fsS http://localhost:8080/cpr > /dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Backend API did not become ready in time"
+          exit 1
+      - name: Run Newman collection (if present)
+        run: |
+          if [ ! -f tests/api/postman/collection.json ]; then
+            echo "No Postman collection found at tests/api/postman/collection.json"
+            echo "Export your collection from Postman and commit it to enable Newman tests."
+            exit 0
+          fi
+
+          if [ -f tests/api/postman/environment.json ]; then
+            echo "Running Newman with Postman environment file"
+            npx newman run tests/api/postman/collection.json -e tests/api/postman/environment.json
+          else
+            echo "No environment file found, running collection only"
+            npx newman run tests/api/postman/collection.json
+          fi
+      - name: Stop backend services
+        if: always()
+        run: docker compose -f backend/docker-compose.yml down -v
+
   playwright-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
