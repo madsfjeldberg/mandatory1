@@ -39,7 +39,8 @@
               ""
             ],
             "type": "text/javascript",
-            "packages": {}
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -114,23 +115,20 @@
               "    pm.response.to.have.status(200);\r",
               "});\r",
               "\r",
-              "\r",
-              "\r",
-              "const response = pm.response.json();\r",
-              "const fields = [\"firstName\", \"lastName\", \"gender\", \"birthDate\"];\r",
-              "fields.forEach(field => {\r",
-              "    pm.test(`${field} should exist`, () => {\r",
-              "        pm.expect(response).to.have.property(field);\r",
+              "pm.test(\"Response shape is correct\", function() {\r",
+              "    pm.response.to.have.jsonSchema({\r",
+              "        \"type\": \"object\",\r",
+              "        \"properties\": {\r",
+              "            \"firstName\": { \"type\": \"string\" },\r",
+              "            \"lastName\": { \"type\": \"string\" },\r",
+              "            \"gender\": { \"type\": \"string\" },\r",
+              "            \"birthDate\": { \"type\": \"string\" },\r",
+              "        },\r",
+              "        \"required\": [\"firstName\", \"lastName\", \"gender\", \"birthDate\"]\r",
               "    });\r",
+              "})\r",
               "\r",
-              "    pm.test(`${field} should be a string`, () => {\r",
-              "        pm.expect(response[field]).to.be.a(\"string\");\r",
-              "    });\r",
-              "\r",
-              "    pm.test(`${field} should not be empty`, () => {\r",
-              "        pm.expect(response[field].trim().length).to.be.above(0);\r",
-              "    });\r",
-              "});"
+              ""
             ],
             "type": "text/javascript",
             "packages": {},
@@ -155,6 +153,36 @@
     },
     {
       "name": "cpr-name-gender",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response shape is correct\", function() {\r",
+              "    pm.response.to.have.jsonSchema({\r",
+              "        \"type\": \"object\",\r",
+              "        \"properties\": {\r",
+              "            \"firstName\": { \"type\": \"string\" },\r",
+              "            \"lastName\": { \"type\": \"string\" },\r",
+              "            \"gender\": { \"type\": \"string\" },\r",
+              "            \"CPR\": { \"type\": \"string\" },\r",
+              "        },\r",
+              "        \"required\": [\"firstName\", \"lastName\", \"gender\", \"CPR\"]\r",
+              "    });\r",
+              "})\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
@@ -172,6 +200,37 @@
     },
     {
       "name": "cpr-name-gender-dob",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response shape is correct\", function() {\r",
+              "    pm.response.to.have.jsonSchema({\r",
+              "        \"type\": \"object\",\r",
+              "        \"properties\": {\r",
+              "            \"firstName\": { \"type\": \"string\" },\r",
+              "            \"lastName\": { \"type\": \"string\" },\r",
+              "            \"gender\": { \"type\": \"string\" },\r",
+              "            \"CPR\": { \"type\": \"string\" },\r",
+              "            \"birthDate\": { \"type\": \"string\"}\r",
+              "        },\r",
+              "        \"required\": [\"firstName\", \"lastName\", \"gender\", \"CPR\", \"birthDate\"]\r",
+              "    });\r",
+              "})\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
@@ -274,7 +333,7 @@
       "response": []
     },
     {
-      "name": "only-allow-get",
+      "name": "only-allow-get (405)",
       "event": [
         {
           "listen": "test",
