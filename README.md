@@ -73,3 +73,19 @@ The frontend tests are written using Playwright. To run the tests:
 ```bash
 npm run test:e2e
 ```
+
+## API Tests (Postman/Newman)
+
+API tests are run with Newman in CI and locally.
+
+1. In Postman, export your collection as JSON.
+2. Save it as `tests/api/postman/collection.json`.
+3. Commit the file to the repository.
+
+Then run API tests locally with:
+
+```bash
+npm run test:api
+```
+
+The CI workflow starts backend services first, then runs Newman against this collection.
