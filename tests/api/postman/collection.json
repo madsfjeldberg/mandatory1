@@ -1,279 +1,349 @@
 {
-	"info": {
-		"_postman_id": "834cd71b-b379-44f0-a997-2ad2efda4ce6",
-		"name": "mandatory1",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "38057922"
-	},
-	"item": [
-		{
-			"name": "cpr",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function() {",
-							"    pm.response.to.have.status(200);",
-							"})",
-							"",
-							"",
-							"pm.test(\"Response shape is correct\", function() {",
-							"    pm.response.to.have.jsonSchema({",
-							"        \"type\": \"object\",",
-							"        \"properties\": {",
-							"            \"CPR\": {",
-							"                \"type\": \"string\"",
-							"            }",
-							"        }",
-							"    })",
-							"})",
-							"",
-							"pm.test(\"CPR value is correct\", function () {",
-							"    const response = pm.response.json();",
-							"    pm.expect(response.CPR).to.exist;",
-							"    pm.expect(response.CPR).to.be.a('string');",
-							"    pm.expect(response.CPR).to.have.lengthOf(10);",
-							"    pm.expect(response.CPR).to.match(/^\\d+$/); // Check if it contains only numbers",
-							"});",
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{BASE_URL}}/cpr",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"cpr"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "name-gender",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"pm.test(\"Response shape is correct\", function() {",
-							"    pm.response.to.have.jsonSchema({",
-							"        \"type\": \"object\",",
-							"        \"properties\": {",
-							"            \"firstName\": { \"type\": \"string\" },",
-							"            \"lastName\": { \"type\": \"string\" },",
-							"            \"gender\": { \"type\": \"string\" }",
-							"        },",
-							"        \"required\": [\"firstName\", \"lastName\", \"gender\"]",
-							"    });",
-							"})",
-							"",
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{BASE_URL}}/name-gender",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"name-gender"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "name-gender-dob",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{BASE_URL}}/name-gender-dob",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"name-gender-dob"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "cpr-name-gender",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{BASE_URL}}/cpr-name-gender",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"cpr-name-gender"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "cpr-name-gender-dob",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{BASE_URL}}/cpr-name-gender-dob",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"cpr-name-gender-dob"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "address",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{BASE_URL}}/address",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"address"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "phone",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{BASE_URL}}/phone",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"phone"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "person",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{BASE_URL}}/person",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"person"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "404check",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 404\", function () {",
-							"    pm.response.to.have.status(404);",
-							"});",
-							"",
-							"pm.test(\"Response body contains error message\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"Incorrect API endpoint\");",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{BASE_URL}}/nonexistent",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"nonexistent"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "only-allow-get",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Response status code is 405\", function () {",
-							"    pm.response.to.have.status(405);",
-							"});",
-							"",
-							"pm.test(\"Response body contains error message\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"Incorrect HTTP method\");",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "{{BASE_URL}}/cpr",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"cpr"
-					]
-				}
-			},
-			"response": []
-		}
-	]
+  "info": {
+    "_postman_id": "d0b9eaac-f109-48ab-a037-d22d58415ba2",
+    "name": "mandatory1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "38062567"
+  },
+  "item": [
+    {
+      "name": "cpr",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function() {",
+              "    pm.response.to.have.status(200);",
+              "})",
+              "",
+              "",
+              "pm.test(\"Response shape is correct\", function() {",
+              "    pm.response.to.have.jsonSchema({",
+              "        \"type\": \"object\",",
+              "        \"properties\": {",
+              "            \"CPR\": {",
+              "                \"type\": \"string\"",
+              "            }",
+              "        }",
+              "    })",
+              "})",
+              "",
+              "pm.test(\"CPR value is correct\", function () {",
+              "    const response = pm.response.json();",
+              "    pm.expect(response.CPR).to.exist;",
+              "    pm.expect(response.CPR).to.be.a('string');",
+              "    pm.expect(response.CPR).to.have.lengthOf(10);",
+              "    pm.expect(response.CPR).to.match(/^\\d+$/); // Check if it contains only numbers",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/cpr",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "cpr"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "name-gender",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Response shape is correct\", function() {",
+              "    pm.response.to.have.jsonSchema({",
+              "        \"type\": \"object\",",
+              "        \"properties\": {",
+              "            \"firstName\": { \"type\": \"string\" },",
+              "            \"lastName\": { \"type\": \"string\" },",
+              "            \"gender\": { \"type\": \"string\" }",
+              "        },",
+              "        \"required\": [\"firstName\", \"lastName\", \"gender\"]",
+              "    });",
+              "})",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/name-gender",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "name-gender"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "name-gender-dob",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "\r",
+              "\r",
+              "const response = pm.response.json();\r",
+              "const fields = [\"firstName\", \"lastName\", \"gender\", \"birthDate\"];\r",
+              "fields.forEach(field => {\r",
+              "    pm.test(`${field} should exist`, () => {\r",
+              "        pm.expect(response).to.have.property(field);\r",
+              "    });\r",
+              "\r",
+              "    pm.test(`${field} should be a string`, () => {\r",
+              "        pm.expect(response[field]).to.be.a(\"string\");\r",
+              "    });\r",
+              "\r",
+              "    pm.test(`${field} should not be empty`, () => {\r",
+              "        pm.expect(response[field].trim().length).to.be.above(0);\r",
+              "    });\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/name-gender-dob",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "name-gender-dob"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "cpr-name-gender",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/cpr-name-gender",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "cpr-name-gender"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "cpr-name-gender-dob",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/cpr-name-gender-dob",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "cpr-name-gender-dob"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "address",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/address",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "address"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "phone",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/phone",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "phone"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "person",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/person",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "person"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "404check",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test(\"Response body contains error message\", function () {",
+              "    pm.expect(pm.response.text()).to.include(\"Incorrect API endpoint\");",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/nonexistent",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "nonexistent"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "only-allow-get",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Response status code is 405\", function () {",
+              "    pm.response.to.have.status(405);",
+              "});",
+              "",
+              "pm.test(\"Response body contains error message\", function () {",
+              "    pm.expect(pm.response.text()).to.include(\"Incorrect HTTP method\");",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/cpr",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "cpr"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          "/*\r",
+          "collection-level scripts for all tests:\r",
+          "    - All requests return JSON data\r",
+          "    - Response time is always less than 200ms\r",
+          "*/\r",
+          "\r",
+          "pm.test(\"Response is JSON\", function () {\r",
+          "    const contentType = pm.response.headers.get(\"Content-Type\");\r",
+          "    pm.expect(contentType).to.exist;\r",
+          "    pm.expect(contentType.toLowerCase()).to.include(\"application/json\");\r",
+          "});\r",
+          "pm.test(\"Response time is less than 200ms\", function () {\r",
+          "    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+          "});"
+        ]
+      }
+    }
+  ]
 }
