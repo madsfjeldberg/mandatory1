@@ -47,11 +47,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/cpr",
+					"raw": "{{BASE_URL}}/cpr",
 					"host": [
-						"localhost"
+						"{{BASE_URL}}"
 					],
-					"port": "8080",
 					"path": [
 						"cpr"
 					]
@@ -93,11 +92,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/name-gender",
+					"raw": "{{BASE_URL}}/name-gender",
 					"host": [
-						"localhost"
+						"{{BASE_URL}}"
 					],
-					"port": "8080",
 					"path": [
 						"name-gender"
 					]
@@ -109,7 +107,16 @@
 			"name": "name-gender-dob",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/name-gender-dob",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"name-gender-dob"
+					]
+				}
 			},
 			"response": []
 		},
@@ -117,7 +124,16 @@
 			"name": "cpr-name-gender",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/cpr-name-gender",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"cpr-name-gender"
+					]
+				}
 			},
 			"response": []
 		},
@@ -125,7 +141,16 @@
 			"name": "cpr-name-gender-dob",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/cpr-name-gender-dob",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"cpr-name-gender-dob"
+					]
+				}
 			},
 			"response": []
 		},
@@ -133,7 +158,16 @@
 			"name": "address",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/address",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"address"
+					]
+				}
 			},
 			"response": []
 		},
@@ -141,7 +175,16 @@
 			"name": "phone",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/phone",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"phone"
+					]
+				}
 			},
 			"response": []
 		},
@@ -149,7 +192,16 @@
 			"name": "person",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/person",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"person"
+					]
+				}
 			},
 			"response": []
 		},
@@ -177,11 +229,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/nonexistent",
+					"raw": "{{BASE_URL}}/nonexistent",
 					"host": [
-						"localhost"
+						"{{BASE_URL}}"
 					],
-					"port": "8080",
 					"path": [
 						"nonexistent"
 					]
@@ -213,11 +264,10 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/cpr",
+					"raw": "{{BASE_URL}}/cpr",
 					"host": [
-						"localhost"
+						"{{BASE_URL}}"
 					],
-					"port": "8080",
 					"path": [
 						"cpr"
 					]
