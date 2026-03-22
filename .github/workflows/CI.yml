@@ -60,7 +60,14 @@ jobs:
             echo "Export your collection from Postman and commit it to enable Newman tests."
             exit 0
           fi
-          npm run test:api
+
+          if [ -f tests/api/postman/environment.json ]; then
+            echo "Running Newman with Postman environment file"
+            npx newman run tests/api/postman/collection.json -e tests/api/postman/environment.json
+          else
+            echo "No environment file found, running collection only"
+            npx newman run tests/api/postman/collection.json
+          fi
       - name: Stop backend services
         if: always()
         run: docker compose -f backend/docker-compose.yml down -v

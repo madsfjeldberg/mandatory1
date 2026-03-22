@@ -1,0 +1,15 @@
+{
+	"id": "5f7f735b-711e-4778-b465-717ba05811b0",
+	"name": "mandatory1",
+	"values": [
+		{
+			"key": "BASE_URL",
+			"value": "localhost:8080",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2026-03-22T10:12:52.990Z",
+	"_postman_exported_using": "Postman/11.62.0"
+}

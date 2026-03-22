@@ -82,6 +82,12 @@ API tests are run with Newman in CI and locally.
 2. Save it as `tests/api/postman/collection.json`.
 3. Commit the file to the repository.
 
+If your requests use environment variables:
+
+1. In Postman, export your environment as JSON.
+2. Save it as `tests/api/postman/environment.json`.
+3. Commit it only if it contains no secrets.
+
 Then run API tests locally with:
 
 ```bash
@@ -89,3 +95,4 @@ npm run test:api
 ```
 
 The CI workflow starts backend services first, then runs Newman against this collection.
+If `tests/api/postman/environment.json` exists, CI uses it automatically.
