@@ -58,6 +58,172 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "name-gender",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response shape is correct\", function() {",
+							"    pm.response.to.have.jsonSchema({",
+							"        \"type\": \"object\",",
+							"        \"properties\": {",
+							"            \"firstName\": { \"type\": \"string\" },",
+							"            \"lastName\": { \"type\": \"string\" },",
+							"            \"gender\": { \"type\": \"string\" }",
+							"        },",
+							"        \"required\": [\"firstName\", \"lastName\", \"gender\"]",
+							"    });",
+							"})",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/name-gender",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"name-gender"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "name-gender-dob",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "cpr-name-gender",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "cpr-name-gender-dob",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "address",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "phone",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "person",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "404check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Response body contains error message\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Incorrect API endpoint\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/nonexistent",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"nonexistent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "only-allow-get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});",
+							"",
+							"pm.test(\"Response body contains error message\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Incorrect HTTP method\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cpr",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cpr"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
