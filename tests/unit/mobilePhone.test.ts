@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import fc from "fast-check";
-import { FakeInfo, } from "../../backend/src/FakeInfo";
+import {FakeInfo, PHONE_PREFIXES,} from "../../backend/src/FakeInfo";
 import {Town} from "../../backend/src/Town";
 
 // Mocking town to avoid db call
@@ -22,6 +22,38 @@ describe("Phone number property-based test", () => {
                     }
                 }
             )
+        );
+    });
+});
+
+describe("Phone prefix property-based test", () => {
+    it("should always use a valid prefix from the list", async () => {
+        await fc.assert(
+            fc.asyncProperty(fc.constant(null), async () => {
+                const person = (await FakeInfo.create()).getFakePerson();
+                const phone = person.phoneNumber;
+
+                const hasValidPrefix = PHONE_PREFIXES.some((prefix) =>
+                    phone.startsWith(prefix)
+                );
+
+                expect(hasValidPrefix).toBe(true);
+            }),
+            { numRuns: 1500 }
+        );
+    });
+});
+
+describe("Phone number format property-based test", () => {
+    it("should only contain digits no letters or symbols", async () => {
+        await fc.assert(
+            fc.asyncProperty(fc.constant(null), async () => {
+                const person = (await FakeInfo.create()).getFakePerson();
+                const phone = person.phoneNumber;
+
+                expect(phone).toMatch(/^\d+$/);
+            }),
+            { numRuns: 1500 }
         );
     });
 });
