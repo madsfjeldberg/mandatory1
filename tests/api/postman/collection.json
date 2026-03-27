@@ -366,6 +366,38 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "invalid-query-param",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 400 for invalid query param\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/person?n=abc",
+          "host": ["{{BASE_URL}}"],
+          "path": ["person"],
+          "query": [
+            {
+              "key": "n",
+              "value": "abc"
+            }
+          ]
+        }
+      },
+      "response": []
     }
   ],
   "event": [
