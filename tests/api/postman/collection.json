@@ -1,9 +1,10 @@
 {
   "info": {
-    "_postman_id": "d0b9eaac-f109-48ab-a037-d22d58415ba2",
+    "_postman_id": "a030442c-5023-4680-9c25-5da5abd80cc1",
     "name": "mandatory1",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "38062567"
+    "_exporter_id": "38057922",
+    "_collection_link": "https://go.postman.co/collection/38057922-a030442c-5023-4680-9c25-5da5abd80cc1?source=collection_link"
   },
   "item": [
     {
@@ -387,8 +388,12 @@
         "header": [],
         "url": {
           "raw": "{{BASE_URL}}/person?n=abc",
-          "host": ["{{BASE_URL}}"],
-          "path": ["person"],
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "person"
+          ],
           "query": [
             {
               "key": "n",
@@ -424,8 +429,12 @@
         "header": [],
         "url": {
           "raw": "{{BASE_URL}}/person?n=0",
-          "host": ["{{BASE_URL}}"],
-          "path": ["person"],
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "person"
+          ],
           "query": [
             {
               "key": "n",
@@ -461,8 +470,12 @@
         "header": [],
         "url": {
           "raw": "{{BASE_URL}}/person?n=101",
-          "host": ["{{BASE_URL}}"],
-          "path": ["person"],
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "person"
+          ],
           "query": [
             {
               "key": "n",
