@@ -12,10 +12,7 @@ import { Town } from "./Town";
 
 const GENDER_FEMININE = "female";
 
-const FILE_PERSON_NAMES = path.join(
-  __dirname,
-  "../data/person-names.json",
-);
+const FILE_PERSON_NAMES = path.join(__dirname, "../data/person-names.json");
 
 export const PHONE_PREFIXES = [
   "2",
@@ -117,7 +114,7 @@ export const PHONE_PREFIXES = [
 const MIN_BULK_PERSONS = 2;
 const MAX_BULK_PERSONS = 100;
 
-interface Address {
+export interface Address {
   street: string;
   number: string;
   floor: string | number;
