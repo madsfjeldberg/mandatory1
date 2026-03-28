@@ -76,7 +76,8 @@ function standardPrefix(): RandCall[] {
 async function generateAddress(sequence: RandCall[]): Promise<Address> {
   const info = Object.create(FakeInfo.prototype) as FakeInfo;
   mockRandIntSequence(sequence);
-  await (info as any).setAddress();
+  // eslint gets angy about using "any" to call a private method, so we have to assert the type again here. :D
+  await (info as unknown as { setAddress: () => Promise<void> }).setAddress();
   return info.getAddress().address;
 }
 
