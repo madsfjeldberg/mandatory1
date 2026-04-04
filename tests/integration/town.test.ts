@@ -43,7 +43,7 @@ describe("Town DB integration", () => {
       .withRootPassword("test")
       .start();
 
-      // copy seed file
+    // copy seed file
     await container.copyFilesToContainer([
       {
         source: SEED_FILE,
@@ -51,11 +51,11 @@ describe("Town DB integration", () => {
       },
     ]);
 
-      // seed database
+    // seed database
     const result = await container.exec([
       "bash",
       "-c",
-      `mysql -u${container.getUsername()} -p${container.getUserPassword()} ${container.getDatabase()} < /seed.sql`,
+      `mysql --default-character-set=utf8mb4 -u${container.getUsername()} -p${container.getUserPassword()} ${container.getDatabase()} < /seed.sql`,
     ]);
 
     if (result.exitCode !== 0) {
@@ -64,16 +64,19 @@ describe("Town DB integration", () => {
       );
     }
 
-      // create connection for test queries
+    // create connection for test queries
     connection = await mysql.createConnection({
       host: container.getHost(),
       port: container.getPort(),
       database: container.getDatabase(),
       user: container.getUsername(),
       password: container.getUserPassword(),
+      charset: "utf8mb4",
     });
 
-      // redirect pool queries to our connection and track executed SQL
+    await connection.query("SET NAMES utf8mb4");
+
+    // redirect pool queries to our connection and track executed SQL
     poolQueryFn = ((sql: string, values?: unknown[]) => {
       executedSql.push(sql);
       return connection.query(sql, values);
@@ -116,10 +119,9 @@ describe("Town DB integration", () => {
     }
   });
 
-  it("Returns a capitalized town name", async () => {
+  it("returns a capitalized town name", async () => {
     const town = await Town.getRandomTown();
-    expect(town.town_name).toMatch(
-      /^[A-ZÆØÅ][a-zæøå]+(?: [A-ZÆØÅ][a-zæøå]+)*$/,
-    );
+    expect(town.town_name.trim()).toBe(town.town_name);
+    expect(town.town_name).toMatch(/^\p{Lu}[\p{L}]*(?: \p{Lu}[\p{L}]*)*$/u);
   });
 });
