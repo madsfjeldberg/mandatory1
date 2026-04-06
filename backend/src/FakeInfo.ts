@@ -471,8 +471,11 @@ export class FakeInfo {
   static async getFakePersons(
     amount: number = MIN_BULK_PERSONS,
   ): Promise<Person[]> {
-    if (amount < MIN_BULK_PERSONS) amount = MIN_BULK_PERSONS;
-    if (amount > MAX_BULK_PERSONS) amount = MAX_BULK_PERSONS;
+    if (amount < MIN_BULK_PERSONS || amount > MAX_BULK_PERSONS) {
+      throw new RangeError(
+        `Bulk amount must be between ${MIN_BULK_PERSONS} and ${MAX_BULK_PERSONS}, got ${amount}`,
+      );
+    }
 
     const persons: Person[] = [];
     for (let i = 0; i < amount; i++) {
