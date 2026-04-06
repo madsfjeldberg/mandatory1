@@ -105,7 +105,7 @@ describe("FakeInfo — Full Person assembly (unit)", () => {
       expect(address.street.length).toBeGreaterThan(0);
     });
 
-    it("address.number is 1–3 digits with an optional single uppercase letter suffix", async () => {
+    it("address.number is 1-3 digits with an optional single uppercase letter suffix", async () => {
       const results = await Promise.all(
         Array.from({ length: 50 }, () => createPerson()),
       );
@@ -128,7 +128,7 @@ describe("FakeInfo — Full Person assembly (unit)", () => {
       });
     });
 
-    it("address.door is 'th', 'tv', 'mf', a number 1–50, or a letter+number pattern", async () => {
+    it("address.door is 'th', 'tv', 'mf', a number 1-50, or a letter+number pattern", async () => {
       const results = await Promise.all(
         Array.from({ length: 100 }, () => createPerson()),
       );
