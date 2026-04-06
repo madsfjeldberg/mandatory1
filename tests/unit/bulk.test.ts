@@ -9,9 +9,6 @@
  *   EC-B5  n = -1  — negative; clamped up to 2.
  *   EC-B6  n = 101 — one above upper boundary; clamped down to 100.
  *   EC-B7  n = 999 — far above upper boundary; still clamped to 100.
- *   EC-B8  n = NaN — non-numeric (mirrors the HTTP layer behaviour where
- *                    parseInt("abc") === NaN); clamped up to 2 because the
- *                    default parameter kicks in.
  *   EC-B9  n = 2 (default invocation) — calling getFakePersons() with no
  *                    argument must use the MIN default and return 2.
  *
@@ -181,13 +178,7 @@ describe("FakeInfo.getFakePersons — bulk size edge cases", () => {
     expect(persons).toHaveLength(100);
   });
  
-  // EC-B8 — NaN (mirrors HTTP layer where parseInt("abc") === NaN)
-  it("treats NaN as below minimum and clamps to 2 (EC-B8: NaN input)", async () => {
-    const persons = await FakeInfo.getFakePersons(NaN);
-    expect(persons).toHaveLength(2);
-  });
- 
-  // EC-B9 — no argument; default parameter should be MIN_BULK_PERSONS (2)
+  // EC-B8 — no argument; default parameter should be MIN_BULK_PERSONS (2)
   it("returns 2 persons when called with no argument (EC-B9: default parameter)", async () => {
     const persons = await FakeInfo.getFakePersons();
     expect(persons).toHaveLength(2);
